@@ -247,7 +247,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 58b387d9e1c1b7b49a66600cc5a221fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -282,6 +282,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567fbdcdc9e6cac41a8cb37b6e8481c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sprites:
+  - {fileID: 21300000, guid: 58b387d9e1c1b7b49a66600cc5a221fe, type: 3}
+  - {fileID: 21300000, guid: 50d81e1ee6e39404f9c34b7e4efedf1c, type: 3}
+  - {fileID: 21300000, guid: 96bca2a7efc10bf4da7de3c41cfa9f4c, type: 3}
+  - {fileID: 21300000, guid: 4d2f9f8629b26454795a0f1e7cbbe941, type: 3}
+  - {fileID: 21300000, guid: c201b0eb6cfeecc4897ddb7527f9807c, type: 3}
 --- !u!1 &270908007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,16 +1544,16 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 703ae45282219274fa86e9196b7495c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 1
+  m_DrawMode: 0
   m_Size: {x: 8, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!4 &1380025901
 Transform:
@@ -1576,6 +1582,11 @@ MonoBehaviour:
   MonsterIndex: 1
   HealthSlider: {fileID: 124877032}
   NameText: {fileID: 1133880553}
+  Sprites:
+  - {fileID: 21300000, guid: 9ef72564dc1f2c14bbda2c2aa0f93075, type: 3}
+  - {fileID: 21300000, guid: fe37870604e0d654d96d4a259361b6e2, type: 3}
+  - {fileID: 21300000, guid: 1ef1f0b434917f649a17ab8813c6680d, type: 3}
+  - {fileID: 21300000, guid: 14fe403f636813e439d051c05df353ff, type: 3}
 --- !u!61 &1380025903
 BoxCollider2D:
   m_ObjectHideFlags: 0

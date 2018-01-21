@@ -27,6 +27,8 @@ public class Monster : MonoBehaviour {
 	bool BecomeRed = true;
 	readonly float redSpeed = 0.5f;
 
+	public Sprite[] Sprites;
+
 	// Use this for initialization
 	void Awake () {
 		Global = this;
@@ -38,6 +40,8 @@ public class Monster : MonoBehaviour {
 		BetweenDamage = PlayerPrefs.GetFloat ("BetweenDamage", Config.Monster.baseBetweenDamage);
 		HealthSlider.minValue = 0;
 		UpdateValues ();
+
+		renderer.sprite = Sprites [Random.Range (0, Sprites.Length)];
 	}
 
 	void Update() {
@@ -85,6 +89,8 @@ public class Monster : MonoBehaviour {
 
 		damagePause = Config.Monster.startNonAttackingTime;
 		BecomeRed = true;
+
+		renderer.sprite = Sprites [Random.Range (0, Sprites.Length)];
 	}
 
 	void UpdateValues() {
