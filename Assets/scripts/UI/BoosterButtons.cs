@@ -24,6 +24,11 @@ public class BoosterButtons : MonoBehaviour {
 		DamageText.text = string.Format ("Damage - {0}%", PlayerPrefs.GetFloat ("DamageBooster", 1f) * 100);
 		HealthText.text = string.Format ("Health - {0}%", PlayerPrefs.GetFloat ("HealthBooster", 1f) * 100);
 		GoldText.text = string.Format ("Gold - {0}%", PlayerPrefs.GetFloat ("GoldBooster", 1f) * 100);
+
+		var text = "Buy booster - " + Config.Boosters.BoosterCost + " gold";;
+		DamageButton.GetComponentInChildren<Text> ().text = text;
+		HealthButton.GetComponentInChildren<Text> ().text = text;
+		GoldButton.GetComponentInChildren<Text> ().text = text;
 	}
 
 	void OnDamageClick() {

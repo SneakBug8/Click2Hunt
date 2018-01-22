@@ -24,8 +24,8 @@ public class Monster : MonoBehaviour {
 	readonly float shakeSpeed = 40f; //how fast it shakes
 	readonly float shakeAmount = 0.25f; //how much it shakes
 
-	bool BecomeRed = true;
-	readonly float redSpeed = 0.5f;
+	float RedTime = 0f;
+	const float RedTimeOnDie = 0.5f;
 
 	public Sprite[] Sprites;
 
@@ -45,19 +45,21 @@ public class Monster : MonoBehaviour {
 	}
 
 	void Update() {
+		// Shake if needed
 		if (ShakeTime > 0) {
 			transform.position = new Vector3 (transform.position.x, Mathf.Sin (Time.time * shakeSpeed) * shakeAmount, 0);
 			ShakeTime -= Time.deltaTime;
 		}
 
-		if (BecomeRed) {
-			renderer.color = Color.Lerp (Color.white, Color.red, Mathf.Sin (Time.time * redSpeed));
+		// Fade red if needed
+		if (RedTime > 0) {
+			var redpart = RedTime / RedTimeOnDie;
+			renderer.color = Color.Lerp (Color.white, Color.red, redpart);
 
-			if (renderer.color == Color.white) {
-				BecomeRed = false;
-			}
+			RedTime -= Time.deltaTime;
 		}
 
+		// Should deal damage or not
 		damagePause -= Time.deltaTime;
 		if (damagePause <= 0) {
 			Player.Global.ReceiveDamage (Mathf.FloorToInt (Random.Range (Damage / 2, Damage * 1.5f)));
@@ -88,7 +90,7 @@ public class Monster : MonoBehaviour {
 		UpdateValues ();
 
 		damagePause = Config.Monster.startNonAttackingTime;
-		BecomeRed = true;
+		RedTime = RedTimeOnDie;
 
 		renderer.sprite = Sprites [Random.Range (0, Sprites.Length)];
 	}
