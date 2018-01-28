@@ -6,14 +6,19 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour {
 	public static LevelController Global;
 
-	public List<CriticalPoint> Points = new List<CriticalPoint>();
-
+	[HideInInspector]
 	public List<float> SpawnQueue = new List<float>();
+
+	[HideInInspector]
+	public List<GameObject> Points = new List<GameObject>();
 
 	public GameObject CriticalPointPref;
 
+	public GameObject[] SpecialCriticalPoints;
+
 	const float MinimumCriticalPointDistance = 1f;
 
+	[Space]
 	public GameObject LostView;
 
 	void Awake () {
@@ -28,17 +33,28 @@ public class LevelController : MonoBehaviour {
 		for (int i = 0; i < SpawnQueue.Count; i++) {
 			SpawnQueue [i] -= Time.deltaTime;
 			if (SpawnQueue [i] <= 0) {
-				var spawned = SpawnCriticalPoint ();
+				var spawned = SpawnCriticalPoint (CriticalPointPref);
 				if (spawned != null) {
-					Points.Add (spawned);
 					SpawnQueue.RemoveAt (i);
+					Points.Add (spawned);
 					break;
 				}
 			}
 		}
+
+		SpawnSpecial ();
 	}
 
-	CriticalPoint SpawnCriticalPoint() {
+	void SpawnSpecial() {
+		var chance = Random.Range(0,100);
+		if (chance <= 2)
+		{
+			var spawned = SpawnCriticalPoint (SpecialCriticalPoints [Random.Range (0, SpecialCriticalPoints.Length)]);
+			Points.Add (spawned);
+		}
+	}
+
+	GameObject SpawnCriticalPoint(GameObject pointPref) {
 		var DownLeft = Camera.main.ViewportToWorldPoint (new Vector3 (0, 0, 0));
 		var UpperRight  = Camera.main.ViewportToWorldPoint (new Vector3 (1, 1, 0));
 
@@ -58,6 +74,7 @@ public class LevelController : MonoBehaviour {
 			}
 
 			bool TooClose = false;
+			Points.Remove(null);
 			foreach (var point in LevelController.Global.Points) {
 				if (Vector2.Distance (point.transform.position, RandomPos) < MinimumCriticalPointDistance) {
 					TooClose = true;
@@ -70,14 +87,19 @@ public class LevelController : MonoBehaviour {
 			}
 				
 
-			var CriticalPoint = Instantiate (CriticalPointPref, new Vector3(RandomPos.x , RandomPos.y, -1), new Quaternion ());
-			return CriticalPoint.GetComponent<CriticalPoint>();
+			var CriticalPoint = Instantiate (pointPref, new Vector3(RandomPos.x , RandomPos.y, -1), new Quaternion ());
+			return CriticalPoint;
 		}
 
 		return null;
 	}
 
 	public void Lose() {
+		PlayerPrefs.SetFloat ("GoldBooster", 1f);
+		PlayerPrefs.SetFloat ("HealthBooster", 1f);
+		PlayerPrefs.SetFloat ("DamageBooster", 1f);
+
+
 		Time.timeScale = 0f;
 		LostView.SetActive (true);
 	}

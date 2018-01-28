@@ -28,7 +28,7 @@ public class CriticalPoint : MonoBehaviour {
 
 	void OnClick() {
 		Monster.Global.ReceiveDamage (Player.Global.DealDamage ());
-		LevelController.Global.Points.Remove (this);
+		LevelController.Global.Points.Remove (gameObject);
 		LevelController.Global.SpawnQueue.Add (SpawningTime);
 		Destroy (gameObject);
 	}

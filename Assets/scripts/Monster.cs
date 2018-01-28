@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour {
 
 	int Health;
 	int Damage;
-	int Gold;
+	public int Gold;
 
 	float damagePause = Config.Monster.startNonAttackingTime;
 	float BetweenDamage;
@@ -62,7 +62,7 @@ public class Monster : MonoBehaviour {
 		// Should deal damage or not
 		damagePause -= Time.deltaTime;
 		if (damagePause <= 0) {
-			Player.Global.ReceiveDamage (Mathf.FloorToInt (Random.Range (Damage / 2, Damage * 1.5f)));
+			Player.Global.ReceiveDamage (Random.Range (Damage / 2, Damage * 1.5f));
 			damagePause = BetweenDamage;
 		}
 	}
@@ -80,12 +80,15 @@ public class Monster : MonoBehaviour {
 		damagePause = BetweenDamage;
 	}
 
+	public void ReceiveDamage(float damage) {
+		ReceiveDamage (Mathf.FloorToInt (damage));
+	}
+
 	void Die() {
 		Debug.Log ("Monster has died.");
 		// TODO: Change monster sprite
 		var booster = PlayerPrefs.GetFloat("GoldBooster", 1f);
-		PlayerPrefs.SetFloat ("GoldBooster", 1f);
-		Player.Global.ReceiveMoney(Mathf.FloorToInt(Gold * booster));
+		Player.Global.ReceiveMoney(Gold * booster);
 		MonsterIndex++;
 		UpdateValues ();
 

@@ -25,14 +25,12 @@ public class Player : MonoBehaviour {
 
 		// Apply booster
 		Health = Mathf.FloorToInt(Health * PlayerPrefs.GetFloat("HealthBooster", 1));
-		PlayerPrefs.SetFloat ("HealthBooster", 1f);
 
 		if (PlayerPrefs.HasKey ("DamageUpdates")) {
 			Damage = Mathf.FloorToInt(Config.Player.baseDamage * Mathf.Pow(Config.Updates.Damage.Progression,PlayerPrefs.GetInt ("DamageUpdates")));
 		}
 
 		Damage = Mathf.FloorToInt(Damage * PlayerPrefs.GetFloat("DamageBooster", 1));
-		PlayerPrefs.SetFloat ("DamageBooster", 1f);
 
 		startGold = PlayerPrefs.GetInt ("Gold", 0);
 
@@ -57,12 +55,21 @@ public class Player : MonoBehaviour {
 		HealthSlider.value = Health;
 	}
 
+	public void ReceiveDamage(float damage) {
+		ReceiveDamage (Mathf.FloorToInt (damage));
+	}
+
+
 	public void ReceiveMoney(int gold) {
 		var Gold = PlayerPrefs.GetInt ("Gold", 0);
 		Debug.Log (string.Format("[Player] Now has {0} + {1} gold.", Gold, gold));
 		PlayerPrefs.SetInt ("Gold", Gold + gold);
 
 		GoldText.text = "Gold = " + startGold + " + " + (Gold + gold - startGold);
+	}
+
+	public void ReceiveMoney(float gold) {
+		ReceiveMoney (Mathf.FloorToInt (gold));
 	}
 
 	void OnDestroy() {

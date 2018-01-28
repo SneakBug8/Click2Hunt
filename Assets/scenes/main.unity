@@ -582,6 +582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 515515184}
   - component: {fileID: 515515183}
+  - component: {fileID: 515515185}
   m_Layer: 0
   m_Name: LevelController
   m_TagString: Untagged
@@ -600,13 +601,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3154e20bea9aee4ab9d2046285a6efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: []
   SpawnQueue:
   - 0.1
   - 0.25
   - 0.5
+  Points: []
   CriticalPointPref: {fileID: 1997896664927222, guid: 1e9127beefaa2e24c83a14fdf1915849,
     type: 2}
+  SpecialCriticalPoints:
+  - {fileID: 1997896664927222, guid: af5343bb2adec5743a1a43adc31cad86, type: 2}
+  - {fileID: 1997896664927222, guid: 2669ebb733f7248408eb79e206347d1a, type: 2}
   LostView: {fileID: 294773317}
 --- !u!4 &515515184
 Transform:
@@ -621,6 +625,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &515515185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 515515182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51daa763e515c264c866f56bae8f79b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamagePerSecond: 0
 --- !u!1 &562176897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1304,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2a976066e19e337459a34f0ea13d9488, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4eac94d76b03234ab6b9da0b58713c4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1786,6 +1802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterIndex: 1
+  Gold: 0
   HealthSlider: {fileID: 124877032}
   NameText: {fileID: 1133880553}
   Sprites:
