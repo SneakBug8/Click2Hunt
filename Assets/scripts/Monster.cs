@@ -29,7 +29,7 @@ public class Monster : MonoBehaviour {
 	}
 	public int Gold {
 		get {
-			return  Mathf.FloorToInt(Config.Monster.baseGold * Mathf.Pow(Config.Monster.goldProgression,MonsterIndex));
+			return Mathf.FloorToInt(Config.Monster.baseGold * Mathf.Pow(Config.Monster.goldProgression,MonsterIndex));
 		}
 	}
 
@@ -67,7 +67,7 @@ public class Monster : MonoBehaviour {
 		HealthSlider.minValue = 0;
 		UpdateValues ();
 
-		renderer.sprite = Sprites [Random.Range (0, Sprites.Length)];
+		ChangeSprite ();
 	}
 
 	void Update() {
@@ -121,7 +121,23 @@ public class Monster : MonoBehaviour {
 		// Apply red anim
 		RedTime = RedTimeOnDie;
 
-		renderer.sprite = Sprites [Random.Range (0, Sprites.Length)];
+		ChangeSprite ();
+	}
+
+	void ChangeSprite() {
+		if (Sprites.Length == 1) {
+			renderer.sprite = Sprites [0];
+			return;
+		}
+
+		var lastSprite = renderer.sprite;
+		var sprite = lastSprite;
+
+		while (sprite == lastSprite) {
+			sprite = Sprites [Random.Range (0, Sprites.Length)];
+		}
+
+		renderer.sprite = sprite;
 	}
 
 	void UpdateValues() {
