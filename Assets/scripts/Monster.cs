@@ -7,11 +7,43 @@ public class Monster : MonoBehaviour {
 	public static Monster Global;
 	public int MonsterIndex = 1;
 
-	SpriteRenderer renderer;
+	new SpriteRenderer renderer;
 
-	int Health;
-	int Damage;
-	public int Gold;
+	int _health; 
+	public int Health {
+		set {
+			_health = value;
+			if (_health <= 0) {
+				Die ();
+			}
+		}
+		get {
+			return _health;
+		}
+	}
+
+	int Damage {
+		get {
+			return personalDamage * card.Damage;
+		}
+	}
+	public int Gold {
+		get {
+			return  Mathf.FloorToInt(Config.Monster.baseGold * Mathf.Pow(Config.Monster.goldProgression,MonsterIndex));
+		}
+	}
+
+	int personalHealth {
+		get {
+			return Mathf.FloorToInt(Config.Monster.baseHealth * Mathf.Pow(Config.Monster.healthProgression,MonsterIndex));
+		}
+	}
+
+	int personalDamage {
+		get {
+			return Mathf.FloorToInt(Config.Monster.baseDamage * Mathf.Pow(Config.Monster.damageProgression,MonsterIndex));
+		}
+	}
 
 	float damagePause = Config.Monster.startNonAttackingTime;
 	float BetweenDamage;
@@ -20,7 +52,7 @@ public class Monster : MonoBehaviour {
 	public Text NameText;
 
 	float ShakeTime = 0f;
-	const float ShakeOnDamage = 0.25f;
+	readonly float ShakeOnDamage = 0.25f;
 	readonly float shakeSpeed = 40f; //how fast it shakes
 	readonly float shakeAmount = 0.25f; //how much it shakes
 
@@ -59,51 +91,51 @@ public class Monster : MonoBehaviour {
 			RedTime -= Time.deltaTime;
 		}
 
-		// Should deal damage or not
+		// Wait until next attack
 		damagePause -= Time.deltaTime;
 		if (damagePause <= 0) {
-			Player.Global.ReceiveDamage (Random.Range (Damage / 2, Damage * 1.5f));
+			Player.Global.ReceiveDamage (Random.Range (Damage / 2, Damage));
 			damagePause = BetweenDamage;
 		}
 	}
 	
-	public void ReceiveDamage(int damage) {
+	public void ReceiveDamage(int damage, bool sleep = true) {
 		Health -= damage;
 		Debug.Log (string.Format("[Monster] Changed health to {0}", Health));
 		HealthSlider.value = Health;
-		if (Health < 0) {
-			Die ();
+
+		if (sleep) {
+			ShakeTime = ShakeOnDamage;
+
+			damagePause = BetweenDamage;
 		}
-
-		ShakeTime = ShakeOnDamage;
-
-		damagePause = BetweenDamage;
 	}
 
-	public void ReceiveDamage(float damage) {
-		ReceiveDamage (Mathf.FloorToInt (damage));
+	public void ReceiveDamage(float damage, bool sleep = true) {
+		ReceiveDamage (Mathf.FloorToInt (damage), sleep);
 	}
 
 	void Die() {
-		Debug.Log ("Monster has died.");
-		// TODO: Change monster sprite
 		var booster = PlayerPrefs.GetFloat("GoldBooster", 1f);
 		Player.Global.ReceiveMoney(Gold * booster);
+
 		MonsterIndex++;
 		UpdateValues ();
 
+		// Apply stun
 		damagePause = Config.Monster.startNonAttackingTime;
+		// Apply red anim
 		RedTime = RedTimeOnDie;
 
 		renderer.sprite = Sprites [Random.Range (0, Sprites.Length)];
 	}
 
 	void UpdateValues() {
-		Health = Mathf.FloorToInt(Config.Monster.baseHealth * Mathf.Pow(Config.Monster.healthProgression,MonsterIndex));
-		Damage = Mathf.FloorToInt(Config.Monster.baseDamage * Mathf.Pow(Config.Monster.damageProgression,MonsterIndex));
-		Gold = Mathf.FloorToInt(Config.Monster.baseGold * Mathf.Pow(Config.Monster.goldProgression,MonsterIndex));
+		Health = personalHealth * card.Health;
+
 		HealthSlider.maxValue = Health;
 		HealthSlider.value = Health;
 		NameText.text = string.Format ("Monster - {0} lvl.", MonsterIndex);
+
 	}
 }

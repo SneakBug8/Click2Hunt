@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public int DealDamage() {
-		return Random.Range (Mathf.FloorToInt(Damage / 2f), Mathf.FloorToInt(Damage * 1.5f));
+		return Random.Range (Mathf.FloorToInt(Damage / 2f), Mathf.FloorToInt(Damage));
 	}
 
 	public void ReceiveDamage(int damage) {
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour {
 		Debug.Log (string.Format("[Player] Now has {0} + {1} gold.", Gold, gold));
 		PlayerPrefs.SetInt ("Gold", Gold + gold);
 
-		GoldText.text = "Gold = " + startGold + " + " + (Gold + gold - startGold);
+		GoldText.text = "" + (Gold + gold);
 	}
 
 	public void ReceiveMoney(float gold) {
