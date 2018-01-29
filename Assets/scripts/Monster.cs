@@ -24,7 +24,7 @@ public class Monster : MonoBehaviour {
 
 	int Damage {
 		get {
-			return personalDamage * card.Damage;
+			return Mathf.FloorToInt(Config.Monster.baseDamage * Mathf.Pow(Config.Monster.damageProgression,MonsterIndex));
 		}
 	}
 	public int Gold {
@@ -33,15 +33,9 @@ public class Monster : MonoBehaviour {
 		}
 	}
 
-	int personalHealth {
+	int maxHealth {
 		get {
 			return Mathf.FloorToInt(Config.Monster.baseHealth * Mathf.Pow(Config.Monster.healthProgression,MonsterIndex));
-		}
-	}
-
-	int personalDamage {
-		get {
-			return Mathf.FloorToInt(Config.Monster.baseDamage * Mathf.Pow(Config.Monster.damageProgression,MonsterIndex));
 		}
 	}
 
@@ -131,7 +125,7 @@ public class Monster : MonoBehaviour {
 	}
 
 	void UpdateValues() {
-		Health = personalHealth * card.Health;
+		Health = maxHealth; // * card.Health;
 
 		HealthSlider.maxValue = Health;
 		HealthSlider.value = Health;

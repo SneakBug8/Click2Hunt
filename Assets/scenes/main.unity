@@ -1802,14 +1802,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterIndex: 1
-  Gold: 0
   HealthSlider: {fileID: 124877032}
   NameText: {fileID: 1133880553}
   Sprites:
-  - {fileID: 21300000, guid: 9ef72564dc1f2c14bbda2c2aa0f93075, type: 3}
   - {fileID: 21300000, guid: fe37870604e0d654d96d4a259361b6e2, type: 3}
   - {fileID: 21300000, guid: 1ef1f0b434917f649a17ab8813c6680d, type: 3}
   - {fileID: 21300000, guid: 14fe403f636813e439d051c05df353ff, type: 3}
+  - {fileID: 21300000, guid: 9ef72564dc1f2c14bbda2c2aa0f93075, type: 3}
 --- !u!61 &1380025903
 BoxCollider2D:
   m_ObjectHideFlags: 0
