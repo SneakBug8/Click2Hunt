@@ -21,6 +21,9 @@ public class LevelController : MonoBehaviour {
 	[Space]
 	public GameObject LostView;
 
+	[Space]
+	public Card[] Cards;
+
 	void Awake () {
 		Global = this;
 	}
@@ -74,7 +77,9 @@ public class LevelController : MonoBehaviour {
 			}
 
 			bool TooClose = false;
-			Points.Remove(null);
+			while (Points.Contains (null)) {
+				Points.Remove (null);
+			}
 			foreach (var point in LevelController.Global.Points) {
 				if (Vector2.Distance (point.transform.position, RandomPos) < MinimumCriticalPointDistance) {
 					TooClose = true;

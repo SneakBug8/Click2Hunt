@@ -19,7 +19,7 @@ public class DPS : MonoBehaviour {
 		BeforeDamage -= Time.deltaTime;
 
 		if (BeforeDamage <= 0) {
-			Monster.Global.ReceiveDamage (DamagePerSecond);
+			Monster.Global.ReceiveDamage (DamagePerSecond, false);
 			BeforeDamage = 1f;
 		}
 	}

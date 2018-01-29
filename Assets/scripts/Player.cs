@@ -14,25 +14,29 @@ public class Player : MonoBehaviour {
 
 	public int startGold;
 
+	Card card;
+
 	void Awake() {
 		Global = this;
 	}
 
 	void Start() {
+		SwapCard ();
+
 		if (PlayerPrefs.HasKey ("HealthUpdates")) {
 			Health = Mathf.FloorToInt(Config.Player.baseHealth * Mathf.Pow (Config.Updates.Health.Progression, PlayerPrefs.GetInt ("HealthUpdates")));
 		}
 
 		// Apply booster
-		Health = Mathf.FloorToInt(Health * PlayerPrefs.GetFloat("HealthBooster", 1));
+		Health = Mathf.FloorToInt(Health * PlayerPrefs.GetFloat("HealthBooster", 1)) * card.Health;
 
 		if (PlayerPrefs.HasKey ("DamageUpdates")) {
 			Damage = Mathf.FloorToInt(Config.Player.baseDamage * Mathf.Pow(Config.Updates.Damage.Progression,PlayerPrefs.GetInt ("DamageUpdates")));
 		}
 
-		Damage = Mathf.FloorToInt(Damage * PlayerPrefs.GetFloat("DamageBooster", 1));
+		Damage = Mathf.FloorToInt(Damage * PlayerPrefs.GetFloat("DamageBooster", 1)) * card.Damage;
 
-		startGold = PlayerPrefs.GetInt ("Gold", 0);
+		startGold = PlayerPrefs.GetInt ("Gold");
 
 		HealthSlider.minValue = 0;
 		HealthSlider.maxValue = Health;
@@ -59,6 +63,10 @@ public class Player : MonoBehaviour {
 		ReceiveDamage (Mathf.FloorToInt (damage));
 	}
 
+	void SwapCard() {
+		// Choose random card
+		card = LevelController.Global.Cards [Random.Range (0, LevelController.Global.Cards.Length)];
+	}
 
 	public void ReceiveMoney(int gold) {
 		var Gold = PlayerPrefs.GetInt ("Gold", 0);

@@ -59,7 +59,7 @@ public class Monster : MonoBehaviour {
 	float RedTime = 0f;
 	const float RedTimeOnDie = 0.5f;
 
-	public Sprite[] Sprites;
+	Card card;
 
 	// Use this for initialization
 	void Awake () {
@@ -71,9 +71,8 @@ public class Monster : MonoBehaviour {
 
 		BetweenDamage = PlayerPrefs.GetFloat ("BetweenDamage", Config.Monster.baseBetweenDamage);
 		HealthSlider.minValue = 0;
+		SwapCard ();
 		UpdateValues ();
-
-		renderer.sprite = Sprites [Random.Range (0, Sprites.Length)];
 	}
 
 	void Update() {
@@ -127,7 +126,13 @@ public class Monster : MonoBehaviour {
 		// Apply red anim
 		RedTime = RedTimeOnDie;
 
-		renderer.sprite = Sprites [Random.Range (0, Sprites.Length)];
+		SwapCard ();
+	}
+
+	void SwapCard() {
+		// Choose random card
+		card = LevelController.Global.Cards [Random.Range (0, LevelController.Global.Cards.Length)];
+		renderer.sprite = card.Sprite;
 	}
 
 	void UpdateValues() {
