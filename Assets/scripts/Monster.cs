@@ -145,7 +145,7 @@ public class Monster : MonoBehaviour {
 
 		HealthSlider.maxValue = Health;
 		HealthSlider.value = Health;
-		NameText.text = string.Format ("Monster - {0} lvl.", MonsterIndex);
+		NameText.text = string.Format ("{0} lvl.", MonsterIndex);
 
 	}
 }
