@@ -73,8 +73,12 @@ public class LevelController : MonoBehaviour {
 				continue;
 			}
 
+			while (Points.Contains (null)) {
+				Points.Remove (null);
+			}
+
 			bool TooClose = false;
-			Points.Remove(null);
+
 			foreach (var point in LevelController.Global.Points) {
 				if (Vector2.Distance (point.transform.position, RandomPos) < MinimumCriticalPointDistance) {
 					TooClose = true;
