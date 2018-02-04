@@ -61,7 +61,7 @@ MonoBehaviour:
   ResourceCurrencies: []
   LastCreatedGamePlatform: -1
   Platforms: 0b000000
-  CurrentInspectorState: 1
+  CurrentInspectorState: 3
   ClosedHints: 
   DisplayHints: 0
   DisplayHintsScrollState: {x: 0, y: 0}
