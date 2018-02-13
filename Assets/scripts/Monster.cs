@@ -7,8 +7,7 @@ public class Monster : MonoBehaviour {
 	public static Monster Global;
 	public int MonsterIndex = 1;
 
-	new SpriteRenderer renderer;
-
+	public new SpriteRenderer renderer;
 	int _health; 
 	public int Health {
 		set {
@@ -64,9 +63,14 @@ public class Monster : MonoBehaviour {
 		renderer = GetComponent<SpriteRenderer> ();
 
 		BetweenDamage = PlayerPrefs.GetFloat ("BetweenDamage", Config.Monster.baseBetweenDamage);
+		MonsterIndex = Mathf.FloorToInt(
+			(PlayerPrefs.GetInt("DamageUpdates") +
+			PlayerPrefs.GetInt("HealthUpdates") +
+			PlayerPrefs.GetInt("StunUpdates"))
+			/ 3);
+
 		HealthSlider.minValue = 0;
 		UpdateValues ();
-
 		ChangeSprite ();
 	}
 

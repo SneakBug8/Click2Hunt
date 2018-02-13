@@ -1,23 +1,15 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
 	public static LevelController Global;
+	public Dictionary<GameObject, float> Points = new Dictionary<GameObject, float>();
 
-	[HideInInspector]
-	public List<float> SpawnQueue = new List<float>();
-
-	[HideInInspector]
-	public List<GameObject> Points = new List<GameObject>();
-
-	public GameObject CriticalPointPref;
-
-	public GameObject[] SpecialCriticalPoints;
-
+	public GameObject[] PointsPrefs;
 	const float MinimumCriticalPointDistance = 1f;
-
 	[Space]
 	public GameObject LostView;
 
@@ -27,59 +19,39 @@ public class LevelController : MonoBehaviour {
 
 	void Start() {
 		Time.timeScale = 1f;
+		float timeout = 0;
+
+		foreach(var pointpref in PointsPrefs) {
+			var point = Instantiate(pointpref, new Vector3(), Quaternion.identity);
+			point.SetActive(false);
+			Points.Add(point, timeout);
+			timeout += 0.2f;
+		}
 	}
 
 	void Update() {
-		for (int i = 0; i < SpawnQueue.Count; i++) {
-			SpawnQueue [i] -= Time.deltaTime;
-			if (SpawnQueue [i] <= 0) {
-				var spawned = SpawnCriticalPoint (CriticalPointPref);
-				if (spawned != null) {
-					SpawnQueue.RemoveAt (i);
-					Points.Add (spawned);
-					break;
-				}
+		var points = Points.Keys.ToArray();
+		foreach (var point in points) {
+			Points[point] -= Time.deltaTime;
+			if (!point.activeSelf && Points[point] <= 0) {
+				SpawnCriticalPoint(point);
+				break;
 			}
 		}
-
-		SpawnSpecial ();
 	}
-
-	void SpawnSpecial() {
-		var chance = Random.Range(0,100);
-		if (chance <= 2)
-		{
-			var spawned = SpawnCriticalPoint (SpecialCriticalPoints [Random.Range (0, SpecialCriticalPoints.Length)]);
-			Points.Add (spawned);
-		}
-	}
-
-	GameObject SpawnCriticalPoint(GameObject pointPref) {
-		var DownLeft = Camera.main.ViewportToWorldPoint (new Vector3 (0, 0, 0));
-		var UpperRight  = Camera.main.ViewportToWorldPoint (new Vector3 (1, 1, 0));
+	GameObject SpawnCriticalPoint(GameObject CriticalPoint) {
+		var DownLeft = Monster.Global.renderer.bounds.min * 0.75f;
+		var UpperRight  = Monster.Global.renderer.bounds.max * 0.75f;
 
 		int i = 0;
-		while (i < 100) {
+		while (i < 2) {
 			i++;
 
 			var RandomPos = new Vector2 (Random.Range (DownLeft.x, UpperRight.x), Random.Range (DownLeft.y, UpperRight.y));
-			var hit = Physics2D.Raycast (RandomPos, Vector2.zero);
-
-			if (!hit) {
-				continue;
-			}
-
-			if (hit.collider.transform != Monster.Global.transform) {
-				continue;
-			}
-
-			while (Points.Contains (null)) {
-				Points.Remove (null);
-			}
 
 			bool TooClose = false;
 
-			foreach (var point in LevelController.Global.Points) {
+			foreach (var point in LevelController.Global.Points.Keys) {
 				if (Vector2.Distance (point.transform.position, RandomPos) < MinimumCriticalPointDistance) {
 					TooClose = true;
 					break;
@@ -91,7 +63,8 @@ public class LevelController : MonoBehaviour {
 			}
 				
 
-			var CriticalPoint = Instantiate (pointPref, new Vector3(RandomPos.x , RandomPos.y, -1), new Quaternion ());
+			CriticalPoint.transform.position = new Vector3(RandomPos.x , RandomPos.y, -1);
+			CriticalPoint.SetActive(true);
 			return CriticalPoint;
 		}
 

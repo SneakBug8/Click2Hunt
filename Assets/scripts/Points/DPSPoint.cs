@@ -5,6 +5,7 @@ using UnityEngine;
 public class DPSPoint : Point {
 	protected override void OnClick() {
 		DPS.Global.DamagePerSecond += Monster.Global.MonsterIndex;
-		Destroy (gameObject);
+		LevelController.Global.Points[gameObject] = SpawningTime;
+		gameObject.SetActive(false);
 	}
 }

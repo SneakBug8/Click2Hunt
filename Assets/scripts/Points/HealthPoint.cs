@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CriticalPoint : Point {
+public class HealthPoint : Point {
 	protected override void OnClick() {
-		Monster.Global.ReceiveDamage (Player.Global.DealDamage ());
+        Player.Global.ReceiveDamage(-Random.Range(0, Monster.Global.MonsterIndex * 5));
 		LevelController.Global.Points[gameObject] = SpawningTime;
 		gameObject.SetActive(false);
 	}

@@ -6,6 +6,6 @@ using UnityEngine.UI;
 public class GoldText : Text {
 
 	void Update() {
-		text = "Gold - " + PlayerPrefs.GetInt ("Gold");
+		text = "" + PlayerPrefs.GetInt ("Gold");
 	}
 }
