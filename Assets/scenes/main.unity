@@ -348,7 +348,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 48
+    m_MaxSize: 64
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
@@ -504,6 +504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RecordText: {fileID: 603371890}
+  DisableObjects:
+  - {fileID: 515515182}
+  - {fileID: 1380025899}
 --- !u!114 &294773323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +518,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7661e5eb5f37e41a344a01250920c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActivateAfterShown:
+  - {fileID: 328476130}
+  - {fileID: 310886475}
 --- !u!1 &310886475
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &310886476
 RectTransform:
   m_ObjectHideFlags: 0
@@ -678,7 +684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &328476131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1155,7 +1161,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 48
+    m_MaxSize: 64
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1

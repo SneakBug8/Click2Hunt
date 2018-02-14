@@ -77,8 +77,6 @@ public class LevelController : MonoBehaviour {
 		PlayerPrefs.SetFloat ("HealthBooster", 1f);
 		PlayerPrefs.SetFloat ("DamageBooster", 1f);
 
-
-		Time.timeScale = 0f;
 		LostView.SetActive (true);
 	}
 }
