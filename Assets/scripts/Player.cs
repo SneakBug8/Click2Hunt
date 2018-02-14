@@ -69,7 +69,9 @@ public class Player : MonoBehaviour {
 
 	public void ScaleUI() {
 		HealthSlider.minValue = 0;
-		HealthSlider.maxValue = Health;
+		if (Health > HealthSlider.maxValue) {
+			HealthSlider.maxValue = Health;
+		}
 		HealthSlider.value = Health;
 	}
 
