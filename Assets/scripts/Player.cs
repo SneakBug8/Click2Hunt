@@ -34,11 +34,8 @@ public class Player : MonoBehaviour {
 
 		startGold = PlayerPrefs.GetInt ("Gold", 0);
 
-		HealthSlider.minValue = 0;
-		HealthSlider.maxValue = Health;
-		HealthSlider.value = Health;
-
-		ReceiveMoney (0);
+		ScaleUI();
+		UpdateUI();		
 	}
 
 	public int DealDamage() {
@@ -51,12 +48,11 @@ public class Player : MonoBehaviour {
 		if (Health < 0) {
 			LevelController.Global.Lose ();
 		}
-
-		HealthSlider.value = Health;
+		UpdateUI();		
 	}
 
 	public void ReceiveDamage(float damage) {
-		ReceiveDamage (Mathf.FloorToInt (damage));
+		ReceiveDamage (Mathf.FloorToInt (damage));	
 	}
 
 
@@ -64,12 +60,22 @@ public class Player : MonoBehaviour {
 		var Gold = PlayerPrefs.GetInt ("Gold", 0);
 		Debug.Log (string.Format("[Player] Now has {0} + {1} gold.", Gold, gold));
 		PlayerPrefs.SetInt ("Gold", Gold + gold);
-
-		GoldText.text = "" + (Gold + gold);
+		UpdateUI();
 	}
 
 	public void ReceiveMoney(float gold) {
 		ReceiveMoney (Mathf.FloorToInt (gold));
+	}
+
+	public void ScaleUI() {
+		HealthSlider.minValue = 0;
+		HealthSlider.maxValue = Health;
+		HealthSlider.value = Health;
+	}
+
+	void UpdateUI() {
+		HealthSlider.value = Health;
+		GoldText.text = "" + PlayerPrefs.GetInt ("Gold", 0);
 	}
 
 	void OnDestroy() {

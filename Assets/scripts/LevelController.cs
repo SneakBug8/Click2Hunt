@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour {
 	public Dictionary<GameObject, float> Points = new Dictionary<GameObject, float>();
 
 	public GameObject[] PointsPrefs;
-	const float MinimumCriticalPointDistance = 1.5f;
+	const float MinimumCriticalPointDistance = 2f;
 	[Space]
 	public GameObject LostView;
 
@@ -52,13 +52,14 @@ public class LevelController : MonoBehaviour {
 			bool TooClose = false;
 
 			foreach (var point in LevelController.Global.Points.Keys) {
-				if (Vector2.Distance (point.transform.position, RandomPos) < MinimumCriticalPointDistance) {
+				if (point.activeSelf && Vector2.Distance (point.transform.position, RandomPos) < MinimumCriticalPointDistance) {
 					TooClose = true;
 					break;
 				}
 			}
 
 			if (TooClose) {
+				Debug.Log("Too close");
 				continue;
 			}
 				
