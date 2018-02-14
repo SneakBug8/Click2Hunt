@@ -314,10 +314,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 214175320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b38181cd692ed6e4aacbc854c1b0986e, type: 3}
+  m_Script: {fileID: 11500000, guid: c556b2c67d4267c46b60881a63c2f661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: main
+  ValueName: GameTutorial
+  SceneIfFirstly: tutorial_main
+  SceneIfSeen: main
 --- !u!1 &250227316
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,46 +852,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910896558}
---- !u!1 &951173428
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 951173430}
-  - component: {fileID: 951173429}
-  m_Layer: 0
-  m_Name: AppoDeal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &951173429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 951173428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fdc7ff9108db7d45bb9bbfe027e8d1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &951173430
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 951173428}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2907.1035, y: 288.30103, z: 84.33539}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1044042473
 GameObject:
   m_ObjectHideFlags: 0

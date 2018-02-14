@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour {
 	public Dictionary<GameObject, float> Points = new Dictionary<GameObject, float>();
 
 	public GameObject[] PointsPrefs;
-	const float MinimumCriticalPointDistance = 1f;
+	const float MinimumCriticalPointDistance = 1.5f;
 	[Space]
 	public GameObject LostView;
 
