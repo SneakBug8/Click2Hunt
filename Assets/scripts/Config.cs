@@ -7,6 +7,8 @@ public static class Config {
 	public static UpdatesConfig Updates = new UpdatesConfig ();
 	public static MonsterConfig Monster = new MonsterConfig ();
 	public static BoostersConfig Boosters = new BoostersConfig();
+
+	public static bool ShowAds = false;
 }
 
 public class PlayerConfig {

@@ -10,19 +10,20 @@ public class AdsDrawer : MonoBehaviour
 
     private void Start() {
         timer = 1f;
+
     }
 
     void Update() {
         timer -= Time.deltaTime;
 
-        if (timer <= 0 && !Shown) {
+        if ((timer <= 0 && !Shown) || !Config.ShowAds) {
             foreach (var obj in ActivateAfterShown) {
                 obj.SetActive(true);
             }
             Shown = true;
         }
 
-        if (timer <= 0 && Advertisement.IsReady()) {
+        if (timer <= 0 && Advertisement.IsReady() && Config.ShowAds) {
             Advertisement.Show();
             timer = 60f;
         }
