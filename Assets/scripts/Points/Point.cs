@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Point : MonoBehaviour {
 	readonly Vector3 RotationPerSecond = new Vector3 (0, 0, 120);
-	BoxCollider2D collider;
+	new BoxCollider2D collider;
 	readonly protected float SpawningTime = 0.5f;
 
 	void Start() {
