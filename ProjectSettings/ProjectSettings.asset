@@ -245,7 +245,7 @@ PlayerSettings:
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: "C:/Users/sneak/Google \u0414\u0438\u0441\u043A/Passwords/games.keystore"
-  AndroidKeyaliasName: click2hunt
+  AndroidKeyaliasName: click2huntpaid
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   AndroidEnableTango: 0
